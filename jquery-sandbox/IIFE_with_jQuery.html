@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <script src="scripts/jquery-3.2.0.js"></script>
+    </head>
+
+    <body>
+        <a href="">A</a>
+        <a href="">B</a>
+        <a href="">C</a>
+        <a href="">D</a>
+        <a href="">E</a>
+
+        <ul>
+            <li>F</li>
+            <li>G</li>
+            <li>H</li>
+            <li>I</li>
+            <li>J</li>
+            <li>K</li>
+        </ul>
+
+        <script>
+            $(document).ready(function () {
+                var elementsA = $('a');
+                var elementsLi = $('li');
+
+                for (var index = 0; index < elementsA.length; index++) {
+                    $(elementsA[index]).click(function (event) {
+                        event.preventDefault();
+                        console.log(index);
+                    });
+                }
+
+                for (var index = 0; index < elementsLi.length; index++) {
+                    (function (lockedInIndex) {
+                        $(elementsLi[lockedInIndex]).click(function (event) {
+                            event.preventDefault();
+                            console.log("lockedInIndex: " + lockedInIndex);
+                            console.log("index: " + index);
+                        });
+                    })(index);
+                }
+            });
+        </script>
+    </body>
+
+</html>

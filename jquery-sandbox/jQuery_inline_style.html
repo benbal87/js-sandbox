@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Insert title here</title>
+        <script src="scripts/jquery-3.2.0.js"></script>
+    </head>
+
+    <body>
+        <div id="test-div-1">AAAAAAAAAAAAAAAAA</div>
+        <div id="test-div-2">BBBBBBBBBBBBBBBBB</div>
+        <a id="test-anchor-1"
+           style="pointer-events: none;">ANCHOR</a>
+        <a id="test-anchor-2">ANCHOR</a>
+        <button id="change-style-1">CHANGE STYLE 1</button>
+        <button id="change-style-2">CHANGE STYLE 2</button>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#change-style-1").click(function () {
+                    $("#test-div-1").css('color', 'red');
+                });
+                $("#change-style-2").click(function () {
+                    $("#test-div-2").css('color', 'red').css('font-size', 'larger');
+                });
+            });
+        </script>
+    </body>
+
+</html>

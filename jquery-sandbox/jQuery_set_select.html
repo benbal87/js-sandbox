@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>jQuery radio button validation</title>
+        <link rel="stylesheet"
+              href="styles/style.css">
+        <script src="scripts/jquery-3.2.0.js"></script>
+        <script src="scripts/jquery.validate.js"></script>
+        <script>
+            $(document).ready(function () {
+                console.log("VALUE BEFORE: " + $('#select1').val());
+                $('#select1').val('004');
+                console.log("VALUE BEFORE SET: " + $('#select1').val());
+                localStorage.setItem('value', $('#select1').val());
+                console.log("VALUE OF THE SELECT: " + localStorage.getItem('value'));
+            })
+        </script>
+    </head>
+
+    <body>
+        <form id="myForm">
+
+            <label for="select1">
+                Select 1.
+            </label>
+            <select name="randomSelects"
+                    id="select1">
+                <option value="001">ONE</option>
+                <option value="002">TWO</option>
+                <option value="003">THREE</option>
+                <option value="004">FOUR</option>
+                <option value="005">FIVE</option>
+            </select>
+
+            <input type="submit"
+                   value="SUBMIT"
+                   id="submitter"
+                   name="submitter">
+
+        </form>
+
+    </body>
+
+</html>

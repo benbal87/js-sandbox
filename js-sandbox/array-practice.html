@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Iterator Expamle</title>
+        <style type="text/css">
+            #dragonArmyContainer {
+                border: 1px solid black;
+                width: 300px;
+                height: 400px;
+                white-space: pre;
+            }
+
+        </style>
+    </head>
+
+    <button id="makeDragonArmyButton">Make Dragons</button>
+    <div id="dragonArmyContainer"></div>
+
+    <body>
+        <script type="text/javascript">
+            (function () {
+
+                var dragons = ['Eragon', 'Drakonis', 'Smaug', 'Süsü']
+
+                dragons.forEach((element, index) => {
+                    console.log(index, element)
+                })
+
+                dragons.push('Hüelye')
+
+                dragons.forEach((element, index) => {
+                    console.log(index, element)
+                })
+
+                var dragonsCopy = [...dragons]
+
+                dragonsCopy[1] = "###Drakonis###"
+
+                console.log('dragons', dragons)
+                console.log('dragonsCopy', dragonsCopy)
+
+                var dragonObjects = [
+                    { name: 'Eragon', age: 234 },
+                    { name: 'Drakonis', age: 489 },
+                    { name: 'Smaug', age: 456 },
+                    { name: 'Süsü', age: 489 }
+                ]
+
+                // DO NOT WORK                
+                var dragonObj = { name: 'Smaug', age: 456 }
+                var isContains = dragonObjects.includes(dragonObj)
+
+                console.log('isContains', isContains)
+
+                // const makeDragonArmyButton = document.getElementById('makeDragonArmyButton')
+
+                // makeDragonArmyButton.addEventListener('click', () => {
+                //     document.getElementById('dragonArmyContainer').innerHTML = ''
+
+                //     for (const dragon of dragonArmy) {
+                //         const dragonArmyContainer = document.getElementById('dragonArmyContainer')
+                //         dragonArmyContainer.innerHTML = dragonArmyContainer.innerHTML + '\n' + dragon
+                //     }
+                // })
+
+            })();
+        </script>
+    </body>
+
+</html>

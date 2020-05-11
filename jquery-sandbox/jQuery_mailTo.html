@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Insert title here</title>
+        <script src="scripts/jquery-3.2.0.js"></script>
+        <style type="text/css">
+            #emailLink {
+                width: 500px;
+                height: 50px;
+                outline: none;
+                border: 1px solid blue;
+                border-radius: 10px;
+                text-align: center;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <a href="#  "
+           id="emailLink">
+            EMAIL LINK
+        </a>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(function () {
+                    $('#emailLink').on('click', function (event) {
+                        event.preventDefault();
+                        alert("Huh");
+                        var email = 'test@theearth.com';
+                        var subject = 'Circle Around';
+                        var emailBody = 'Some blah';
+                        window.location = 'mailto:' + email + '?subject=' + subject + '&body=' + emailBody;
+                    });
+                });
+            });
+        </script>
+    </body>
+
+</html>

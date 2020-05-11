@@ -1,0 +1,72 @@
+<button class="btn btn-primary write-new-note center-block"
+        (click)="showNoteForm()">
+	Write new note
+</button>
+<form (ngSubmit)="onSubmit()"
+      #noteForm="ngForm"
+      [hidden]="isNoteFormHidden">
+	<div class="form-group">
+		<label for="idOfNote">
+			Note ID
+		</label>
+		<input type="text"
+		       class="form-control"
+		       id="idOfNote"
+		       required
+		       [(ngModel)]="noteInputId"
+		       name="noteId"
+		       #idRef="ngModel">
+		<div [hidden]="idRef.valid || idRef.pristine"
+		     class="alert alert-dander">
+			Note id is required!
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="nameOfNote">
+			Note name
+		</label>
+		<input type="text"
+		       class="form-control"
+		       id="nameOfNote"
+		       required
+		       [(ngModel)]="noteInputName"
+		       name="noteName"
+		       #nameRef="ngModel">
+		<div [hidden]="nameRef.valid || nameRef.pristine"
+		     class="alert alert-dander">
+			Note name is required!
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="priority">
+			Priority
+		</label>
+		<select id="priority"
+		        class="form-control"
+		        required
+		        [(ngModel)]="noteInputPriority"
+		        name="priority">
+			<option *ngFor="let p of priorities" [value]="p">
+				{{p}}
+			</option>
+		</select>
+	</div>
+
+	<button type="submit"
+	        class="btn btn-success"
+	        (click)="saveNote(); noteForm.reset()"
+	        [disabled]="!noteForm.form.valid">
+		Save note
+	</button>
+</form>
+
+
+<app-note-list [noteArray]="noteArray"
+           [priorities]="priorities"
+           (noteEditEmitter)="setNoteForEdit($event)"
+           (noteDeleteEmitter)="deleteNote($event)"
+           (testEmitter)="logOutEmitting($event)">
+	Loading...
+</app-note-list>

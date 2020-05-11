@@ -1,0 +1,19 @@
+form {
+  margin-bottom: 65px;
+}
+
+.form-group {
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn {
+  display: block;
+  margin: 0 auto;
+}
+
+.write-new-note {
+  width: 200px;
+  margin-bottom: 45px;
+}

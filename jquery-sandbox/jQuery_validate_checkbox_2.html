@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>jQuery Checkbox validation</title>
+        <link rel="stylesheet"
+              href="styles/style.css">
+        <style>
+            * {
+                font-family: Verdana;
+                font-size: 96%;
+            }
+
+            label.error {
+                float: none;
+                color: red;
+                margin: 0 .5em 0 0;
+                vertical-align: top;
+                font-size: 10px;
+                display: block
+            }
+
+        </style>
+        <script src="scripts/jquery-3.2.0.js"></script>
+        <script src="scripts/jquery.validate.js"></script>
+        <script>
+            $.validator.addMethod('require-one', function (value) {
+                if ($('#resp01-sim').is(':checked')) {
+                    return $('.require-one:checked').size() > 0;
+                }
+                else {
+                    return true;
+                }
+            }, 'Selecione pelo menos uma das opções.');
+
+            $(document).ready(function () {
+
+                var checkboxes = $('.require-one');
+                var checkbox_names = $.map(checkboxes, function (e, i) {
+                    return $(e).attr("name")
+                }).join(" ");
+
+                $("#itemForm").validate({
+                    groups: {
+                        checks: checkbox_names
+                    },
+                    rules: {
+                        resp01: 'required',
+                    },
+                    messages: {
+                        resp01: { required: 'Selecione uma resposta!' },
+                    },
+                    errorPlacement: function (error, element) {
+                        $('#form_error').append(error);
+                    },
+                    submitHandler: function (form) {
+                        alert('Form Submited');
+                        return false;
+                    }
+
+                });
+            });
+        </script>
+    </head>
+
+    <body>
+        <form name="itemForm"
+              id="itemForm"
+              method="post">
+            <p>
+                <input name="resp01"
+                       type="radio"
+                       value="sim"
+                       id="resp01-sim"
+                       class="resp" />
+                <label for="resp01-sim">Sim</label>
+                <input name="resp01"
+                       type="radio"
+                       value="não"
+                       id="resp01-nao"
+                       class="resp" />
+                <label for="resp01-nao">Não</label>
+            </p>
+            <fieldset style="width:200px">
+                <legend>Outros catalogos</legend>
+                <input id="opt01"
+                       name="opt01"
+                       type="checkbox"
+                       value="true"
+                       class="require-one" />
+                <label for="opt01">opt01</label>
+                <input name="opt01"
+                       type="hidden"
+                       value="false" />
+                <br />
+
+                <input id="opt02"
+                       name="opt02"
+                       type="checkbox"
+                       value="true"
+                       class="require-one" />
+                <label for="opt02">opt02</label>
+                <input name="river2"
+                       type="hidden"
+                       value="false" />
+                <br />
+
+                <input id="opt03"
+                       name="opt03"
+                       type="checkbox"
+                       value="true"
+                       class="require-one" />
+                <label for="opt03">opt03</label>
+                <input name="opt03"
+                       type="hidden"
+                       value="false" />
+                <br />
+            </fieldset>
+            <div class="error"
+                 id="form_error"></div>
+            <br />
+            <input type="submit" />
+        </form>
+
+
+    </body>
+
+</html>

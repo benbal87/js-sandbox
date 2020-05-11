@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>YouTube API</title>
+</head>
+<body>
+<h1>YOUTUBE API</h1>
+<div id="ytplayer"></div>
+<script>
+  let tag = document.createElement('script')
+  tag.src = 'https://www.youtube.com/player_api'
+  let firstScriptTag = document.getElementsByTagName('script')[0]
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
+
+  let player
+  function onYouTubePlayerAPIReady() {
+    player = new YT.Player(
+      'ytplayer',
+      {
+        height: '360',
+        width: '640',
+        videoId: 'M7lc1UVf-VE'
+      }
+    )
+  }
+</script>
+</body>
+</html>

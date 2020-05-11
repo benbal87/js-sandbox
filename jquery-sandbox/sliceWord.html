@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Insert title here</title>
+        <script src="scripts/jquery-3.2.0.js"></script>
+    </head>
+
+    SLICED WORD:
+    <div id="slicedWord">
+
+    </div>
+
+    <body>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var searchTerm = 'Mis';
+                var city = 'Kozármisleny';
+
+                console.log('indexOfSearchTerm', city.indexOf(searchTerm));
+
+                sliceSuggestion(city, suggestionPart) {
+                    let part = ''
+                    let indexOfSearchTerm = city.toLowerCase().indexOf(searchTerm.toLowerCase())
+
+                    if (suggestionPart === 1) {
+                        part = city.slice(0, indexOfSearchTerm)
+                    } else if (suggestionPart === 2) {
+                        part = city.slice(indexOfSearchTerm, indexOfSearchTerm + searchTerm.length)
+                    } else if (suggestionPart === 3) {
+                        part = city.slice(indexOfSearchTerm + searchTerm.length)
+                    }
+
+                    return part
+                }
+
+                capitalizeFirstLetter(string) {
+                    return string.charAt(0).toUpperCase() + string.slice(1);
+                }
+
+                var first = sliceSuggestion(city, 1);
+                var second = sliceSuggestion(city, 2);
+                var third = sliceSuggestion(city, 3);
+
+                var slicedWord = first + second + third;
+                console.log('slicedWord', slicedWord);
+
+                $('#slicedWord').html(slicedWord);
+            });
+        </script>
+    </body>
+
+</html>

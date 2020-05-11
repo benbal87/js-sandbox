@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scroll to element</title>
+  <style>
+    p {
+      margin: 200px 20px;
+    }
+  </style>
+</head>
+<body>
+
+<p id="p1">DIV 1</p>
+<p id="p2">DIV 2</p>
+<p id="p3">DIV 3</p>
+<p id="p4">DIV 4</p>
+<p id="p5">DIV 5</p>
+<p id="p6">DIV 6</p>
+<p id="p7">DIV 7</p>
+<p id="p8">DIV 8</p>
+<p id="p9">DIV 9</p>
+
+<script>
+  const idList = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9']
+  function scrollToElement(elementId) {
+    let element = document.getElementById(elementId)
+    element.scrollIntoView({ behavior: 'smooth', block: 'start', inline: 'nearest' })
+    console.log('scrolled to: [' + elementId + ']')
+  }
+
+  let count = 0
+  setInterval(() => {
+    scrollToElement(idList[count])
+    count++
+    console.log(count)
+    if (count === idList.length - 1) {
+      count = 0
+    }
+  }, 1000)
+</script>
+
+</body>
+</html>

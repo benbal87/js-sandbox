@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>jQuery radio button validation</title>
+        <link rel="stylesheet"
+              href="styles/style.css">
+        <link rel="stylesheet"
+              href="styles/jquery-ui-1.10.4.css">
+        <script src="scripts/jquery-3.2.0.js"></script>
+        <script src="scripts/jquery-ui-1.10.4.js"></script>
+        <script>
+            $(document).ready(function () {
+                var checkBoxSetStates = [];
+
+                $("#checkBtn").click(function () {
+                    $.each($("input[name='checkBoxSet[]']"), function (key, value) {
+                        console.log(key + ": " + value.checked);
+                    });
+
+                    $.each($("input[name='checkBoxSet[]']"), function (key, value) {
+                        checkBoxSetStates.push(value.checked);
+                    });
+
+                    $("#statusData").val(checkBoxSetStates);
+                    var checkboxStatesFormatted = $("#statusData").val().replace(/,/g, ";");
+                    console.log(checkboxStatesFormatted);
+                });
+            });
+        </script>
+    </head>
+
+    <body>
+
+        <input type="text"
+               id="statusData"
+               hidden>
+
+        <label for="checkBox1">
+            C 1.
+        </label>
+        <input id="checkBox1"
+               name="checkBoxSet[]"
+               type="checkbox">
+
+        <label for="checkBox2">
+            C 2.
+        </label>
+        <input id="checkBox2"
+               name="checkBoxSet[]"
+               type="checkbox">
+
+        <label for="checkBox3">
+            C 3.
+        </label>
+        <input id="checkBox3"
+               name="checkBoxSet[]"
+               type="checkbox">
+
+        <label for="checkBox4">
+            C 4.
+        </label>
+        <input id="checkBox4"
+               name="checkBoxSet[]"
+               type="checkbox">
+
+        <input type="button"
+               id="checkBtn"
+               value="SUBMIT">
+    </body>
+
+</html>

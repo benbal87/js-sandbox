@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="./assets/gow_logo.png">
+    <title>Promise Expamle</title>
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      (function () {
+
+        function loadImage(url) {
+          return new Promise((resolve, reject) => {
+            let image = new Image()
+
+            image.onload = function () {
+              resolve(image)
+            }
+
+            image.onerror = function () {
+              let message = 'Could not load image at: ' + url
+              reject(new Error(msg))
+            }
+
+            image.src = url
+          })
+        }
+
+        let addImage = (imageSource) => {
+          let imageElement = document.createElement('img')
+          imageElement.src = imageSource
+          imageElement.width = 300
+          imageElement.height = 300
+          document.body.appendChild(imageElement)
+        }
+
+        Promise.all([
+          loadImage('./assets/mangalica_001.jpg'),
+          loadImage('./assets/mangalica_002.jpg'),
+          loadImage('./assets/mangalica_003.jpg'),
+          loadImage('./assets/mangalica_004.jpg'),
+          loadImage('./assets/mangalica_005.jpg')
+        ]).then((images) => {
+          images.forEach(image => addImage(image.src))
+        }).catch((error) => {
+          console.error(error)
+        })
+
+      })();
+    </script>
+  </body>
+
+</html>

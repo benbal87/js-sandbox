@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>jQuery radio button validation</title>
+        <link rel="stylesheet"
+              href="styles/style.css">
+        <script src="scripts/jquery-3.2.0.js"></script>
+        <script src="scripts/jquery.validate.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#myForm input').on('change', function () {
+                    console.log($('input[name=radioName]:checked').val());
+                });
+
+                $('#setRadio1').click(function () {
+                    $("#radio1").prop("checked", true)
+                });
+
+                $('#setRadio2').click(function () {
+                    $("input[name=radioName][value=" + 2 + "]").prop('checked', true);
+                });
+
+                console.log("TEST: ");
+                console.log(sessionStorage.getItem('ererg'));
+            })
+        </script>
+    </head>
+
+    <body>
+        <form id="myForm">
+
+            <input type="radio"
+                   id="radio1"
+                   name="radioName"
+                   value="1" /> ONE
+            <br />
+            <input type="radio"
+                   id="radio2"
+                   name="radioName"
+                   value="2" /> TWO
+            <br />
+            <input type="radio"
+                   id="radio3"
+                   name="radioName"
+                   value="3" /> THREE
+            <br />
+
+            <input type="button"
+                   id="setRadio1"
+                   value="set button one by NAME">
+
+            <input type="button"
+                   id="setRadio2"
+                   value="set button two by VALUE">
+
+            <input type="submit"
+                   value="SUBMIT"
+                   id="submitter"
+                   name="submitter">
+
+        </form>
+
+    </body>
+
+</html>

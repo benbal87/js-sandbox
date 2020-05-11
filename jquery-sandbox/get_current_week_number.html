@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Insert title here</title>
+        <script src="scripts/jquery-3.2.0.js"></script>
+    </head>
+
+    <body>
+        <button id="getWeekNumber">GET WEEK NUMBER</button>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                function getWeekNumber() {
+                    var onejan = new Date(new Date().getFullYear(), 0, 1);
+                    var today = new Date();
+                    var dayOfYear = ((today - onejan + 1) / 86400000);
+
+                    console.log('dayOfYear: ' + dayOfYear);
+
+                    var weekNumber = Math.ceil(dayOfYear / 7);
+
+                    console.log('weekNumber: ' + weekNumber);
+
+                    return weekNumber;
+                };
+
+                $('#getWeekNumber').click(function () {
+                    var weekNumber = getWeekNumber();
+                });
+
+            });
+        </script>
+    </body>
+
+</html>

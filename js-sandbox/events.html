@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+          type="text/css"
+          media="screen"
+          href="main.css" />
+  </head>
+
+  <body>
+    <button id="button">TRIGGER_EVENT</button>
+    <script>
+      (function () {
+        const btn = document.getElementById('button')
+
+        btn.addEventListener('click', () => {
+          const randomEvent = new CustomEvent('randomEvent', { detail: 'THIS IS THE detail' });
+          document.dispatchEvent(randomEvent)
+        })
+
+        document.addEventListener('randomEvent', (event) => {
+          console.log('event', event)
+          console.log('event.detail', event.detail)
+        })
+      })()
+    </script>
+  </body>
+
+</html>

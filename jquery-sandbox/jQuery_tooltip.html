@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <link rel="stylesheet"
+              href="styles/jquery-ui-1.12.1.css">
+        <style>
+            .test-buttons {
+                width: 200px;
+                height: 50px;
+                border-radius: 12px;
+                background-color: blue;
+                color: white;
+                text-align: center;
+                font-size: 18px;
+                font-weight: bolder;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 60px;
+                margin-bottom: 60px;
+                display: block;
+            }
+
+            .test-buttons:hover {
+                background-color: red;
+            }
+
+            .tooltip {
+                border-radius: 10px;
+                border: 2px solid grey;
+                padding: 10px;
+            }
+
+        </style>
+        <script src="scripts/jquery-3.2.0.js"></script>
+        <script src="scripts/jquery-ui-1.12.1.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#test-button-01').tooltip({
+                    content: 'This is a tooltip for test button ONE!',
+                    hide: {
+                        effect: 'drop',
+                        duration: 1000,
+                    },
+                    tooltipClass: 'tooltip',
+                });
+
+                var content = $('#test-button-01').tooltip('option', 'content');
+                var hide = $('#test-button-01').tooltip('option', 'hide');
+
+                $('#test-button-02').tooltip({
+                    content: content,
+                    hide: hide,
+                    tooltipClass: 'tooltip',
+                });
+
+                $('#test-button-03').tooltip({
+                    hide: hide,
+                    tooltipClass: 'tooltip',
+                });
+            });
+
+        </script>
+    </head>
+
+    <body>
+        <button id="test-button-01"
+                name="buttons"
+                title=""
+                class="test-buttons">
+            Test Button 01
+        </button>
+        <button id="test-button-02"
+                name="buttons"
+                title=""
+                class="test-buttons">
+            Test Button 02
+        </button>
+        <button id="test-button-03"
+                name="buttons"
+                title="This is a tooltip for button THREE!"
+                class="test-buttons">
+            Test Button 03
+        </button>
+        <button id="test-button-04"
+                name="buttons"
+                title=""
+                class="test-buttons">
+            Test Button 04
+        </button>
+    </body>
+
+</html>

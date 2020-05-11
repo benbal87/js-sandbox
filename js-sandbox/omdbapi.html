@@ -1,0 +1,71 @@
+<!--Created by benedek balazs on 30/05/2016.-->
+
+<!--WEEK 17B ASSESSMENT - TASK 02/02 - FILE 01/01 - BENEDEK BALAZS-->
+
+<!--There is an open API for International Movie Databas here:-->
+<!--http://www.omdbapi.com/-->
+
+<!--Write a small website which get all information about your favorite movie using the -->
+<!--API and show it's content on your site. Show the data below:-->
+<!--Title, Year, short plot, Actors (in an unordered list)-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Wolverine</title>
+    </head>
+
+    <body>
+        <h1 id="header"
+            align="center">Movie data</h1>
+        <table id="movieData">
+            <tr>
+                <th>Data Type</th>
+                <th>Data</th>
+            </tr>
+        </table>
+        <script type="text/javascript">
+            (function () {
+                var response = "";
+                var url = 'http://www.omdbapi.com/?t=Wolverine&r=json';
+                var movieProps = ['Title', 'Year', 'Plot', 'Actors'];
+
+                var xmlHttpRequest = new XMLHttpRequest();
+
+                xmlHttpRequest.onreadystatechange = function () {
+                    if (xmlHttpRequest.readyState == 4 && xmlHttpRequest.status == 200) {
+                        var jSonParsed = JSON.parse(xmlHttpRequest.responseText);
+
+                        var movieData = document.getElementById('movieData');
+
+                        for (var i = 0; i < movieProps.length; ++i) {
+                            var movieProperty = movieProps[i];
+
+                            if (jSonParsed.hasOwnProperty(movieProperty)) {
+                                var movieTable = document.createElement('tr');
+
+                                var columnDataType = document.createElement('td');
+                                var columnData = document.createElement('td');
+
+                                columnDataType.innerText = movieProperty;
+                                columnData.innerText = jSonParsed[movieProperty];
+
+                                movieTable.appendChild(columnDataType);
+                                movieTable.appendChild(columnData);
+
+                                movieData.appendChild(movieTable);
+                            }
+                        }
+                    }
+                };
+
+                xmlHttpRequest.open('GET', url, true);
+                xmlHttpRequest.send();
+            })();
+        </script>
+    </body>
+
+</html>

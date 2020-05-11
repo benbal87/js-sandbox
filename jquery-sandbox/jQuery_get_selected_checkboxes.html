@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>jQuery radio button validation</title>
+        <link rel="stylesheet"
+              href="styles/style.css">
+        <script src="scripts/jquery-3.2.0.js"></script>
+        <script src="scripts/jquery.validate.js"></script>
+        <script>
+            var selected = [];
+            var checkBoxesToSelect = ['checkbox_1', 'checkbox_3'];
+            $(document).ready(function () {
+                $('#showSelectedCheckboxes').click(function () {
+                    $('#checkboxes input:checked').each(function () {
+                        selected.push($(this).attr('id'));
+                    });
+                    console.log("SELECTED CHECKBOXES: " + selected.toString());
+                });
+
+                $('#selectCheckboxesOneAndTwo').click(function () {
+                    $.each(checkBoxesToSelect, function (index, value) {
+                        $("#" + value).prop('checked', true);
+                    });
+                });
+
+                $('#selectCheckBoxesFromSession').click(function () {
+                    var selectedBoxes = sessionStorage.getItem('selectedCheckBoxes').split(",");
+                    for (i = 0; i < selectedBoxes.length; i++) {
+                        console.log(selectedBoxes[i]);
+                        $("#" + selectedBoxes[i]).prop('checked', true);
+                    }
+                    sessionStorage.clear();
+                });
+
+                var selectedCheckBoxes = [];
+                $('#saveSelectedCheckBoxesToSession').click(function () {
+                    $('#checkboxes input:checked').each(function () {
+                        selectedCheckBoxes.push($(this).attr('id'));
+                    });
+                    sessionStorage.setItem('selectedCheckBoxes', selectedCheckBoxes);
+
+                    console.log("SELECTED BOXES: ");
+                    console.log(selectedCheckBoxes.toString());
+                    console.log("SELECTED BOXES FROM STORAGE: ");
+                    console.log(sessionStorage.getItem('selectedCheckBoxes'));
+                });
+
+            })
+        </script>
+    </head>
+
+    <body>
+
+        <div id="checkboxes">
+            <input id="checkbox_1"
+                   type="checkbox"
+                   name="checkboxes[]" /> Option 1
+            <input id="checkbox_2"
+                   type="checkbox"
+                   name="checkboxes[]" /> Option 2
+            <input id="checkbox_3"
+                   type="checkbox"
+                   name="checkboxes[]" /> Option 3
+            <input id="checkbox_4"
+                   type="checkbox"
+                   name="checkboxes[]" /> Option 4
+        </div>
+        <input type="button"
+               id="showSelectedCheckboxes"
+               value="SHOW the selected checkboxes!" />
+        <input type="button"
+               id="selectCheckboxesOneAndTwo"
+               value="SELECT checkboxes one and two!" />
+        <input type="button"
+               id="saveSelectedCheckBoxesToSession"
+               value="SAVE TO SESSION">
+        <input type="button"
+               id="selectCheckBoxesFromSession"
+               value="SELECT FROM SESSION">
+
+    </body>
+
+</html>

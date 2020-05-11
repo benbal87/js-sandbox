@@ -1,0 +1,6 @@
+Omirth, The Grumpy	dagger	212	2
+Omirth, The Grumpy	arrow	130	1
+Omirth, The Grumpy	mace	300	2
+Biekarth, The Dark	sword	233	22
+Biekarth, The Dark	scythe	222	1
+Biekarth, The Dark	polearm	100	21

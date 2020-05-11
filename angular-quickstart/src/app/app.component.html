@@ -1,0 +1,46 @@
+<div>
+  <button class="btn btn-danger"
+          (click)="setLanguage('hu')">
+    Hungarian
+  </button>
+  <button class="btn btn-danger"
+          (click)="setLanguage('fr')">
+    French
+  </button>
+  <button class="btn btn-danger"
+          (click)="setLanguage('en')">
+    English
+  </button>
+  <button class="btn btn-default"
+          (click)="manageWolves('-')">
+    - wolves
+  </button>
+  <button class="btn btn-default"
+          (click)="manageWolves('+')">
+    + wolves
+  </button>
+  <span i18n>this is a {wolves, plural, =0 {no wolves} =1 {one wolf} =2 {two wolves} other {a wolf pack}}</span>
+
+  <br>
+
+  <div i18n
+       *ngFor="let wolves of wolvesArray">
+    {wolves, plural, =0 {no wolves} =1 {one wolf} =2 {two wolves} other {a wolf pack}}
+  </div>
+
+  <br>
+  <button (click)="getRouterState()">
+    Get State
+  </button>
+  <div>
+    Router current state: {{getRouterState()}}
+  </div>
+
+</div>
+<div class="page-title">{{title | uppercase}}</div>
+<nav>
+  <a routerLink="/login" routerLinkActive="active">Login</a>
+  <a routerLink="/about" routerLinkActive="active">About</a>
+  <a routerLink="/note-form" routerLinkActive="active">Note Form</a>
+</nav>
+<router-outlet></router-outlet>

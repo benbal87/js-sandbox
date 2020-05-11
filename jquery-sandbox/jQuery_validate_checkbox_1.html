@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>jQuery Checkbox validation</title>
+        <link rel="stylesheet"
+              href="styles/style.css">
+        <script src="scripts/jquery-3.2.0.js"></script>
+        <script src="scripts/jquery.validate.js"></script>
+        <script>
+            $(function () {
+                $.validator.setDefaults({
+                    errorClass: 'help-block',
+                    highlight: function (element) {
+                        $(element)
+                            .closest('.form-group')
+                            .addClass('has-error');
+                    },
+                    unhighlight: function (element) {
+                        $(element)
+                            .closest('.form-group')
+                            .removeClass('has-error');
+                    },
+                    errorPlacement: function (error, element) {
+                        if (element.prop('type') === 'checkbox') {
+                            error.insertAfter(element.parents().eq(3));
+                        }
+                        else if (element.prop('type') === 'radio') {
+                            error.insertAfter(element.parents().eq(3));
+                        }
+                        else {
+                            error.insertAfter(element);
+                        }
+                    }
+                });
+
+                $.validator.addMethod(
+                    "chooseOtherActivity",
+                    function () {
+                        var s = $("input[name^='checkboxID']:checked");
+                        console.log(s);
+                        console.log(s.length);
+                        return $("input[name^='checkboxID']:checked").length > 0;
+                    },
+                    "CHECK AT LEAST ONE PLEASE!!!"
+                );
+
+                $("#myForm").validate({
+                    rules: {
+                        checkBOXES: {
+                            chooseOtherActivity: true
+                        }
+                    }
+                });
+            });
+        </script>
+    </head>
+
+    <body>
+        <form id="myForm">
+
+            <div name="checkBOXES">
+                <div>
+                    <div>
+                        <input type="checkbox"
+                               id="checkboxID"
+                               name="nameForCheckBoxGroup1"
+                               value="1">
+                        <label for="radio1">1. Checkbox</label>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <input type="checkbox"
+                               id="checkboxID"
+                               name="nameForCheckBoxGroup2"
+                               value="1">
+                        <label for="radio2">2. Checkbox</label>
+                    </div>
+                </div>
+
+                <div>
+                    <div>
+                        <input type="checkbox"
+                               id="checkboxID"
+                               name="nameForCheckBoxGroup2"
+                               value="1">
+                        <label for="radio3">3. Checkbox</label>
+                    </div>
+                </div>
+            </div>
+
+            <input type="submit"
+                   value="SUBMIT"
+                   id="submitter"
+                   name="submitter">
+
+        </form>
+
+    </body>
+
+</html>

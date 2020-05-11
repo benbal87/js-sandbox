@@ -1,0 +1,57 @@
+.form-group {
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.notes {
+  width: 40%;
+  margin: 10px auto;
+}
+
+.noteId {
+  font-size: 18px;
+  font-weight: bold;
+  padding-right: 20px;
+  vertical-align: middle;
+}
+
+.note {
+
+  font-size: 18px;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+.note-btn {
+  float: right;
+  width: 60px;
+}
+
+.delete-btn {
+  margin-left: 15px;
+}
+
+.red {
+  color: red;
+}
+
+.orange {
+  color: orange;
+}
+
+.blue {
+  color: blue;
+}
+
+.green {
+  color: green;
+}
+
+.yellow {
+  color: yellow;
+}
+
+.pink {
+  color: pink;
+}

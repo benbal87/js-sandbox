@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <title>jQuery set image source</title>
+    <script src="scripts/jquery-3.2.0.js"></script>
+    <style>
+      #testImage {
+        border: 3px solid black;
+        width: 600px;
+        height: 600px;
+      }
+
+    </style>
+  </head>
+
+  <img id="testImage"
+       src="./images/bear01.jpg"
+       alt="hej" />
+
+  <button id="setImageBtn">
+    setImageBtn
+  </button>
+
+  <body>
+    <script type="text/javascript">
+      $(document).ready(function () {
+
+        $('#setImageBtn').click(function () {
+
+          $('#testImage').attr('src', './images/bear02.jpg');
+
+        });
+
+      });
+    </script>
+  </body>
+
+</html>

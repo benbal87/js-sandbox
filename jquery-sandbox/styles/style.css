@@ -1,0 +1,39 @@
+body {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container {
+    display: flex;
+    margin: 30px auto;
+}
+
+.id {
+    display: inline-block;
+    width: 80px;
+    margin: auto;
+    text-align: center;
+}
+
+.user {
+    width: 100%;
+}
+
+.stars {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.data {
+    display: inline-block;
+}
+
+.date {
+    float: right;
+}
+
+.btn-language {
+    height: 30px;
+    width: 45px;
+}

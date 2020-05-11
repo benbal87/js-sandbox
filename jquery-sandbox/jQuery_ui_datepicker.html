@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>jQuery radio button validation</title>
+        <link rel="stylesheet"
+              href="styles/style.css">
+        <link rel="stylesheet"
+              href="styles/jquery-ui-1.12.1.css">
+        <script src="scripts/jquery-3.2.0.js"></script>
+        <script src="scripts/jquery-ui-1.12.1.js"></script>
+        <script>
+            $(document).ready(function () {
+                if (!Modernizr.touch || !Modernizr.inputtypes.date) {
+                    $('input[type=date]')
+                        .attr('type', 'text')
+                        .datepicker({
+                            // Consistent format with the HTML5 picker
+                            dateFormat: 'yy-mm-dd'
+                        });
+                }
+            });
+        </script>
+    </head>
+
+    <body>
+
+        <input type="date">
+
+    </body>
+
+</html>
