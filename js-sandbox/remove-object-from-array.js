@@ -18,12 +18,8 @@ let testObj2 = {
 
 let array = [ testObj0, testObj1, testObj2 ]
 
-array
-
 array.forEach((element, index) => {
   if (element.id === 1) {
     array.splice(index, 1)
   }
 })
-
-array

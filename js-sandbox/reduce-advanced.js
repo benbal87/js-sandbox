@@ -1,6 +1,6 @@
-var fs = require('fs')
+let fs = require('fs')
 
-var output = fs.readFileSync('./assets/data.txt', 'utf8')
+let output = fs.readFileSync('./assets/data.txt', 'utf8')
     .split('\n')
     .map(line => line
         .slice(0, -1)
