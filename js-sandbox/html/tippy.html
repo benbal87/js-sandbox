@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+  >
+  <meta
+    http-equiv="X-UA-Compatible"
+    content="ie=edge"
+  >
+  <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+  <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
+  <title>Tippy</title>
+  <style>
+    .tippy-test {
+      margin: 200px;
+    }
+  </style>
+</head>
+<body>
+<button class="tippy-test">Tippy Test</button>
+<script>
+  tippy('.tippy-test', {
+    animation: 'scale',
+    content: "I'm a Tippy tooltip!"
+  });
+</script>
+</body>
+</html>
