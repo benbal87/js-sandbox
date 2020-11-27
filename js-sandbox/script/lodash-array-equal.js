@@ -1,4 +1,4 @@
-let _ = require('./assets/lodash');
+let _ = require('lodash');
 
 let objArray1 = [
   {
