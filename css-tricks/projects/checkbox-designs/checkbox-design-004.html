@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible"
+              content="ie=edge">
+        <title>Checkbox Design 4</title>
+        <link rel="icon"
+              type="image/png"
+              href="../../images/css-logo.png">
+        <style>
+            input[type='checkbox'] {
+                --active: #275EFE;
+                --active-inner: #FFFFFF;
+                --focus: 2px rgba(39, 94, 254, .3);
+                --border: #BBC1E1;
+                --border-hover: #275EFE;
+                --background: #FFFFFF;
+                --disabled: #F6F8FF;
+                --disabled-inner: #E1E6F9;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                width: 21px;
+                height: 21px;
+                outline: none;
+                border-radius: 7px;
+                display: inline-block;
+                position: relative;
+                cursor: pointer;
+                border: 1px solid var(--border);
+                background-color: var(--background);
+                -webkit-transition: background .3s, border-color .3s, box-shadow .2s;
+                transition: background .3s, border-color .3s, box-shadow .2s;
+            }
+
+            input[type='checkbox']:after {
+                content: '';
+                display: block;
+                position: absolute;
+                width: 5px;
+                height: 9px;
+                border: 2px solid var(--active-inner);
+                border-top: 0;
+                border-left: 0;
+                left: 6px;
+                top: 3px;
+                -webkit-transform: rotate(10deg);
+                transform: rotate(10deg);
+                opacity: 1;
+                -webkit-transition: opacity 0.5s, -webkit-transform 1s cubic-bezier(.2, .85, .32, 1.2);
+                transition: opacity 0.5s, transform 1s cubic-bezier(.2, .85, .32, 1.2);
+            }
+
+            input[type='checkbox']:checked:after {
+                -webkit-transform: rotate(45deg);
+                transform: rotate(45deg);
+                opacity: 1;
+            }
+
+            input[type='checkbox']:checked {
+                background-color: var(--active);
+                border: 1px solid var(--active);
+            }
+
+            input[type='checkbox']:disabled {
+                background-color: var(--disabled);
+                cursor: not-allowed;
+                opacity: .9;
+            }
+
+            input[type='checkbox']:disabled:checked {
+                background-color: var(--disabled-inner);
+                border: 1px solid var(--border);
+            }
+
+            input[type='checkbox']:disabled + label {
+                cursor: not-allowed;
+            }
+
+            input[type='checkbox']:hover:not(:checked):not(:disabled) {
+                border: 1px solid var(--border-hover);
+            }
+
+            input[type='checkbox']:focus {
+                box-shadow: 0 0 0 var(--focus);
+            }
+
+            body {
+                min-height: 100vh;
+                color: #8A91B4;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: #F6F8FF;
+            }
+
+            ul {
+                list-style: none;
+            }
+
+            ul li {
+                margin: 16px 0;
+            }
+        </style>
+    </head>
+    <body>
+        <ul>
+            <li>
+                <input id="c1"
+                       type="checkbox">
+                <label for="c1">Checkbox</label>
+            </li>
+            <li>
+                <input id="c2"
+                       type="checkbox"
+                       checked>
+                <label for="c2">Checkbox</label>
+            </li>
+            <li>
+                <input id="c1d"
+                       type="checkbox"
+                       disabled>
+                <label for="c1d">Checkbox</label>
+            </li>
+            <li>
+                <input id="c2d"
+                       type="checkbox"
+                       checked
+                       disabled>
+                <label for="c2d">Checkbox</label>
+            </li>
+        </ul>
+    </body>
+</html>

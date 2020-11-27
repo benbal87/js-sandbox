@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible"
+              content="ie=edge">
+        <title>Checkbox Design 1</title>
+        <link rel="icon"
+              type="image/png"
+              href="../../images/css-logo.png">
+        <!-- https://www.youtube.com/watch?v=z3TgmTi42ic -->
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                background: #292929;
+            }
+
+            .center {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            input[type="checkbox"] {
+                position: relative;
+                width: 120px;
+                height: 40px;
+                -webkit-appearance: none;
+                background: linear-gradient(0deg, #333333, #000000);
+                outline: none;
+                border-radius: 20px;
+                box-shadow: 0 0 0 4px #353535,
+                0 0 0 5px #3E3E3E,
+                inset 0 0 10px rgba(0, 0, 0, 1),
+                0 5px 20px rgba(0, 0, 0, 0.5),
+                inset 0 0 15px rgba(0, 0, 0, 0.2);
+            }
+
+            input:checked[type="checkbox"] {
+                background: linear-gradient(0deg, #6DD1FF, #20B7FF);
+                box-shadow: 0 0 2px #6DD1FF,
+                0 0 0 4px #353535,
+                0 0 0 5px #3E3E3E,
+                inset 0 0 10px rgba(0, 0, 0, 1),
+                0 5px 20px rgba(0, 0, 0, 0.5),
+                inset 0 0 15px rgba(0, 0, 0, 0.2);
+            }
+
+            input[type="checkbox"]:before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 80px;
+                height: 40px;
+                background: linear-gradient(0deg, #000000, #6B6B6B);
+                border-radius: 20px;
+                box-shadow: 0 0 0 1px #232323;
+                transform: scale(0.98, 0.96);
+                transition: 0.5s;
+            }
+
+            input:checked[type="checkbox"]:before {
+                left: 40px;
+            }
+
+            input[type="checkbox"]:after {
+                content: '';
+                position: absolute;
+                top: calc(50% - 2px);
+                left: 65px;
+                width: 4px;
+                height: 4px;
+                background: linear-gradient(0deg, #6B6B6B, #000000);
+                border-radius: 50px;
+                transition: 0.5s;
+            }
+
+            input:checked[type="checkbox"]:after {
+                background: #63CDFF;
+                left: 105px;
+                box-shadow: 0 0 5px #13B3FF,
+                0 0 15px #13B3FF;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div class="center">
+            <input type="checkbox">
+        </div>
+
+    </body>
+
+</html>
