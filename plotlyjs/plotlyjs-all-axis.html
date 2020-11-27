@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible"
+              content="ie=edge">
+        <title>Plotly.js</title>
+<!--        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>-->
+        <script src="https://cdn.plot.ly/plotly-1.54.7.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.0/moment.min.js"
+                integrity="sha512-Izh34nqeeR7/nwthfeE0SI3c8uhFSnqxV0sI9TvTcXiFJkMd6fB644O64BRq2P/LA/+7eRvCw4GmLsXksyTHBg=="
+                crossorigin="anonymous"></script>
+        <style>
+            #plotlyContainer {
+                width: 800px;
+                height: 400px;
+            }
+
+            .moment-format-test > * {
+                margin: 20px 5px;
+            }
+
+            .moment-output > span {
+                font-weight: bold;
+            }
+
+            .moment-output > div {
+                display: inline-block;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="plotlyContainer"></div>
+        <div class="moment-format-test">
+            <div>
+                <label for="dateString">DATE STRING: </label>
+                <input id="dateString"
+                       type="text">
+            </div>
+            <div>
+                <label for="momentFormatType">FORMAT TYPE: </label>
+                <input id="momentFormatType"
+                       type="text">
+            </div>
+            <div class="moment-output">
+                <span>OUTPUT:</span>
+                <div id="momentOutput"></div>
+            </div>
+            <button id="formatDateBtn">FORMAT</button>
+        </div>
+
+        <script type="text/javascript">
+            const date = [
+                '2020-07-06T00:00:00.000Z',
+                '2020-07-13T00:00:00.000Z',
+                '2020-07-20T00:00:00.000Z',
+                '2020-07-27T00:00:00.000Z',
+                '2020-08-03T00:00:00.000Z',
+                '2020-08-10T00:00:00.000Z',
+                '2020-08-17T00:00:00.000Z',
+                '2020-08-24T00:00:00.000Z',
+                '2020-08-31T00:00:00.000Z',
+                '2020-09-07T00:00:00.000Z',
+                '2020-09-14T00:00:00.000Z',
+                '2020-09-21T00:00:00.000Z',
+                '2020-09-28T00:00:00.000Z',
+                '2020-10-05T00:00:00.000Z'
+            ]
+
+            // const date = [
+            //     'Jul 06, 2020',
+            //     'Jul 13, 2020',
+            //     'Jul 20, 2020',
+            //     'Jul 27, 2020',
+            //     'Aug 03, 2020',
+            //     'Aug 10, 2020',
+            //     'Aug 17, 2020',
+            //     'Aug 24, 2020',
+            //     'Aug 31, 2020',
+            //     'Sep 07, 2020',
+            //     'Sep 14, 2020',
+            //     'Sep 21, 2020',
+            //     'Sep 28, 2020',
+            //     'Oct 05, 2020'
+            // ]
+
+            // const date = [
+            //     '07-06-20',
+            //     '07-13-20',
+            //     '07-20-20',
+            //     '07-27-20',
+            //     '08-03-20',
+            //     '08-10-20',
+            //     '08-17-20',
+            //     '08-24-20',
+            //     '08-31-20',
+            //     '09-07-20',
+            //     '09-14-20',
+            //     '09-21-20',
+            //     '09-28-20',
+            //     '10-05-20'
+            // ]
+
+            const sum_loc_effort = [
+                0,
+                1049.2000136375,
+                475.6000026464,
+                201.8000030518,
+                1094.1999936104,
+                402.200001359,
+                171.4000065327,
+                255.4000008106,
+                116.4000015259,
+                98.5999962091,
+                549.5999970436,
+                893.1999939978,
+                0,
+                0
+            ]
+            const sum_hours = [
+                0.25,
+                20.5009383754,
+                12.4641339869,
+                6.3641666667,
+                17.2154166667,
+                12.0860130719,
+                6.9769771242,
+                8.2929084967,
+                6.1605914161,
+                5.1378040226,
+                12.040734267,
+                5.5879513274,
+                0,
+                0
+            ]
+            const efficiency = [
+                0,
+                17.7507665353,
+                100,
+                54.1019955654,
+                84.1357027464,
+                98.2264665757,
+                73.6111111111,
+                96.2025316456,
+                99.0909090909,
+                97.247706422,
+                96.2666666667,
+                100,
+                0,
+                0
+            ]
+
+            const plotlyContainer = document.getElementById('plotlyContainer')
+
+            const lineMarkerWidth = 5
+
+            const codeVolumeTrace = {
+                name: 'Code Volume',
+                type: 'bar',
+                marker: {
+                    color: '#F3C62D'
+                },
+                x: date,
+                y: sum_loc_effort
+            }
+
+            const codingHoursTrace = {
+                name: 'Coding Hours',
+                type: 'scatter',
+                marker: {
+                    color: '#4F7CA9',
+                    size: lineMarkerWidth
+                },
+                x: date,
+                y: sum_hours,
+                yaxis: 'y2'
+            }
+
+            const efficiencyTrace = {
+                name: 'Efficiency',
+                type: 'scatter',
+                marker: {
+                    color: '#12B6CB',
+                    size: lineMarkerWidth
+                },
+                x: date,
+                y: efficiency,
+                yaxis: 'y3'
+            }
+
+            const layout = {
+                // paper_bgcolor: 'grey',
+                // displayModeBar: false,
+                plot_bgcolor: 'white',
+                hovermode: 'closest',
+                modebar: {
+                    orientation: 'v'
+                },
+                hoverlabel: {
+                    bgcolor: '#4F7CA9',
+                    bordercolor: 'rgba(0,0,0,0)',
+                    font: {
+                        color: 'white'
+                    }
+                },
+                margin: {
+                    l: 40,
+                    r: 0,
+                    b: 60,
+                    t: 0,
+                    pad: 0
+                },
+                legend: {
+                    orientation: 'h',
+                    yanchor: 'bottom',
+                    y: -0.22,
+                    xanchor: 'center',
+                    x: 0.5,
+                    font: {
+                        // family: 'normal normal normal Source Sans Pro',
+                        color: '#B8B8B8'
+                    }
+                    // xtextoffset: 10, // for all items OR [0,0,-1, /* .. */] to offset each item independently
+                    // ytestoffset: 10   // similarly
+                },
+                xaxis: {
+                    color: '#B8B8B8',
+                    // tickangle: -25,
+                    zeroline: false,
+                    showgrid: false,
+                    showline: true,
+                    linewidth: 5,
+                    linecolor: '#F2F2F2',
+                    // ticklen: 5,
+                    // showdividers: false,
+                    // side: 'top',
+                    // anchor: 'free',
+                    // domain: [0, 1],
+                    // position: 0.05,
+                    tickformat: '%m.%d %y'
+                },
+                yaxis: {
+                    // color: '#B8B8B8',
+                    // zeroline: false,
+                    // showgrid: false,
+                    // showline: true,
+                    // linewidth: 3,
+                    // linecolor: '#F2F2F2',
+                    // range: [0, 1200],
+                    // showdividers: false,
+                    // anchor: 'free',
+                    // position: 0.02,
+                    visible: false
+                },
+                yaxis2: {
+                    // title: 'Coding Hours',
+                    overlaying: 'y',
+                    visible: false
+                    // side: 'right',
+                    // anchor: "x",
+                    // position: 0.5,
+                    // showgrid: false,
+                    // linecolor: 'black',
+                    // showline: true,
+                    // linewidth: 2,
+                    // zeroline: false
+                },
+                yaxis3: {
+                    // title: 'Efficiency',
+                    overlaying: 'y',
+                    visible: false
+                    // side: 'left',
+                    // anchor: 'free',
+                    // showgrid: false,
+                    // zeroline: false
+                }
+            }
+
+            const data = [codeVolumeTrace, codingHoursTrace, efficiencyTrace]
+
+            const config = {
+                displayModeBar: false
+                // transition: {
+                //     duration: 500,
+                //     easing: 'cubic-in-out'
+                // },
+                // frame: {
+                //     duration: 500
+                // }
+            }
+
+            const figure = {
+                data,
+                // layout,
+                config
+            }
+
+            const test = {
+                data: [
+                    {
+                        name: 'Code Volume111',
+                        type: 'bar',
+                        marker: {
+                            color: '#F3C62D'
+                        },
+                        x: [
+                            '2020-07-06T00:00:00.000Z',
+                            '2020-07-13T00:00:00.000Z',
+                            '2020-07-20T00:00:00.000Z',
+                            '2020-07-27T00:00:00.000Z',
+                            '2020-08-03T00:00:00.000Z',
+                            '2020-08-10T00:00:00.000Z',
+                            '2020-08-17T00:00:00.000Z',
+                            '2020-08-24T00:00:00.000Z',
+                            '2020-08-31T00:00:00.000Z',
+                            '2020-09-07T00:00:00.000Z',
+                            '2020-09-14T00:00:00.000Z',
+                            '2020-09-21T00:00:00.000Z',
+                            '2020-09-28T00:00:00.000Z',
+                            '2020-10-05T00:00:00.000Z'
+                        ],
+                        y: [
+                            0,
+                            1049.2000136375,
+                            475.6000026464,
+                            201.8000030518,
+                            1094.1999936104,
+                            402.200001359,
+                            171.4000065327,
+                            255.4000008106,
+                            116.4000015259,
+                            98.5999962091,
+                            549.5999970436,
+                            893.1999939978,
+                            0,
+                            0
+                        ]
+                    },
+                    {
+                        name: 'Coding Hours',
+                        type: 'scatter',
+                        marker: {
+                            color: '#4F7CA9',
+                            size: 5
+                        },
+                        x: [
+                            '2020-07-06T00:00:00.000Z',
+                            '2020-07-13T00:00:00.000Z',
+                            '2020-07-20T00:00:00.000Z',
+                            '2020-07-27T00:00:00.000Z',
+                            '2020-08-03T00:00:00.000Z',
+                            '2020-08-10T00:00:00.000Z',
+                            '2020-08-17T00:00:00.000Z',
+                            '2020-08-24T00:00:00.000Z',
+                            '2020-08-31T00:00:00.000Z',
+                            '2020-09-07T00:00:00.000Z',
+                            '2020-09-14T00:00:00.000Z',
+                            '2020-09-21T00:00:00.000Z',
+                            '2020-09-28T00:00:00.000Z',
+                            '2020-10-05T00:00:00.000Z'
+                        ],
+                        y: [
+                            0.25,
+                            20.5009383754,
+                            12.4641339869,
+                            6.3641666667,
+                            17.2154166667,
+                            12.0860130719,
+                            6.9769771242,
+                            8.2929084967,
+                            6.1605914161,
+                            5.1378040226,
+                            12.040734267,
+                            5.5879513274,
+                            0,
+                            0
+                        ],
+                        yaxis: 'y2'
+                    },
+                    {
+                        name: 'Efficiency',
+                        type: 'scatter',
+                        marker: {
+                            color: '#12B6CB',
+                            size: 5
+                        },
+                        x: [
+                            '2020-07-06T00:00:00.000Z',
+                            '2020-07-13T00:00:00.000Z',
+                            '2020-07-20T00:00:00.000Z',
+                            '2020-07-27T00:00:00.000Z',
+                            '2020-08-03T00:00:00.000Z',
+                            '2020-08-10T00:00:00.000Z',
+                            '2020-08-17T00:00:00.000Z',
+                            '2020-08-24T00:00:00.000Z',
+                            '2020-08-31T00:00:00.000Z',
+                            '2020-09-07T00:00:00.000Z',
+                            '2020-09-14T00:00:00.000Z',
+                            '2020-09-21T00:00:00.000Z',
+                            '2020-09-28T00:00:00.000Z',
+                            '2020-10-05T00:00:00.000Z'
+                        ],
+                        y: [
+                            0,
+                            17.7507665353,
+                            100,
+                            54.1019955654,
+                            84.1357027464,
+                            98.2264665757,
+                            73.6111111111,
+                            96.2025316456,
+                            99.0909090909,
+                            97.247706422,
+                            96.2666666667,
+                            100,
+                            0,
+                            0
+                        ],
+                        yaxis: 'y3'
+                    }
+                ],
+                layout: {
+                    plot_bgcolor: 'white',
+                    hovermode: 'closest',
+                    modebar: {
+                        orientation: 'v'
+                    },
+                    hoverlabel: {
+                        bgcolor: '#4F7CA9',
+                        bordercolor: 'rgba(0,0,0,0)',
+                        font: {
+                            color: 'white'
+                        }
+                    },
+                    margin: {
+                        l: 40,
+                        r: 0,
+                        b: 60,
+                        t: 0,
+                        pad: 0
+                    },
+                    legend: {
+                        orientation: 'h',
+                        yanchor: 'bottom',
+                        y: -0.22,
+                        xanchor: 'center',
+                        x: 0.5,
+                        font: {
+                            color: '#B8B8B8'
+                        }
+                    },
+                    xaxis: {
+                        color: '#B8B8B8',
+                        zeroline: false,
+                        showgrid: false,
+                        showline: true,
+                        linewidth: 5,
+                        linecolor: '#F2F2F2',
+                        tickformat: '%m.%d %y'
+                    },
+                    yaxis: {
+                        visible: false
+                    },
+                    yaxis2: {
+                        overlaying: 'y',
+                        visible: false
+                    },
+                    yaxis3: {
+                        overlaying: 'y',
+                        visible: false
+                    }
+                },
+                config: {
+                    displayModeBar: false
+                }
+            }
+
+            Plotly.plot(plotlyContainer, figure)
+
+            document.getElementById('formatDateBtn').addEventListener('click', () => {
+                const dateString = document.getElementById('dateString').value
+                console.log('dateString', dateString)
+
+                const momentFormatType = document.getElementById('momentFormatType').value
+                console.log('momentFormatType', momentFormatType)
+
+                const formattedDate = moment(dateString).format(momentFormatType)
+                console.log('formattedDate', formattedDate)
+
+                document.getElementById('momentOutput').innerText = formattedDate
+            })
+        </script>
+    </body>
+</html>
