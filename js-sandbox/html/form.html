@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible"
+              content="ie=edge">
+        <title>Form</title>
+        <style>
+            body {
+                display: grid;
+                grid-template-columns: repeat(3, 3fr);
+            }
+
+            .test-form,
+            .radio-buttons {
+                display: flex;
+                flex-flow: column;
+            }
+
+            .test-form > * {
+                margin-bottom: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <form class="test-form"
+              id="testForm"
+              action="">
+            <div>TESTING</div>
+            <label for="input1">
+                Input one
+                <input type="text"
+                       id="input1">
+            </label>
+            <label for="input2">
+                Input two
+                <input type="text"
+                       id="input2">
+            </label>
+            <label for="checkbox1">
+                CheckBox one
+                <input type="checkbox"
+                       id="checkbox1">
+            </label>
+            <label for="checkbox2">
+                CheckBox two
+                <input type="checkbox"
+                       id="checkbox2">
+            </label>
+            <div class="radio-buttons">
+                Radio Buttons
+                <label for="radio1">radio_one
+                    <input type="radio"
+                           id="radio1"
+                           name="radioBtn">
+                </label>
+                <label for="radio2">radio_two
+                    <input type="radio"
+                           id="radio2"
+                           name="radioBtn">
+                </label>
+                <label for="radio3">radio_three
+                    <input type="radio"
+                           id="radio3"
+                           name="radioBtn">
+                </label>
+                <label for="radio4">radio_four
+                    <input type="radio"
+                           id="radio4"
+                           name="radioBtn">
+                </label>
+            </div>
+            <textarea name=""
+                      id="testTextArea"
+                      cols="30"
+                      rows="10"></textarea>
+        </form>
+
+        <div class="button-container">
+            <button id="getFormDataBtn">
+                Get Form Data
+            </button>
+        </div>
+
+        <script type="text/javascript">
+            const getFormDataBtn = document.getElementById('getFormDataBtn')
+            getFormDataBtn.addEventListener('click', () => {
+                const testFormElement = document.getElementById('testForm')
+                for (const element of testFormElement.elements) {
+                    if (element.type === 'text' || element.type === 'textarea') {
+                        console.log(element.id, element.value)
+                    } else if (element.type === 'checkbox' || element.type === 'radio') {
+                        console.log(element.id, element.checked)
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>
