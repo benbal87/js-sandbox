@@ -50,9 +50,9 @@ sourcesElements.forEach(item => {
 })
 
 function sortable(section, onUpdate) {
-    let dragEl, nextEl, newPos, dragGhost
+    let dragElement, nextElement, newPosition, dragGhost
 
-    let oldPos = [...section.children].map(item => {
+    let oldPosition = [...section.children].map(item => {
         item.draggable = true
         return document.getElementById(item.id).getBoundingClientRect()
     })
@@ -62,54 +62,55 @@ function sortable(section, onUpdate) {
         event.dataTransfer.dropEffect = 'move'
 
         const target = event.target
-        if (target && target !== dragEl && target.nodeName.toLowerCase() === 'div') {
+        if (target && target !== dragElement && target.nodeName.toLowerCase() === 'div') {
             if (target.classList.contains('inside')) {
                 event.stopPropagation()
             } else {
-                //getBoundingClientRect contains location-info about the element (relative to the viewport)
+                // getBoundingClientRect contains location-info about the element (relative to the viewport)
                 const targetPos = target.getBoundingClientRect()
-                //checking that dragEl is dragged over half the target y-axis or x-axis. (therefore the .5)
+                // checking that dragElement is dragged over half the target y-axis or x-axis. (therefore the 0.5)
                 const next =
-                    (event.clientY - targetPos.top) / (targetPos.bottom - targetPos.top) > .5
-                    || (event.clientX - targetPos.left) / (targetPos.right - targetPos.left) > .5
-                section.insertBefore(dragEl, next && target.nextSibling || target)
+                    (event.clientY - targetPos.top) / (targetPos.bottom - targetPos.top) > 0.5
+                    || (event.clientX - targetPos.left) / (targetPos.right - targetPos.left) > 0.5
 
-                /*  console.log("oldPos:" + JSON.stringify(oldPos));
-                 console.log("newPos:" + JSON.stringify(newPos)); */
-                /* console.log(newPos.top === oldPos.top ? 'They are the same' : 'Not the same'); */
-                console.log(oldPos)
+                section.insertBefore(dragElement, next && target.nextSibling || target)
+
+                // console.log('oldPosition:' + JSON.stringify(oldPosition))
+                // console.log('newPosition:' + JSON.stringify(newPosition))
+                // console.log(newPosition.top === oldPosition.top ? 'They are the same' : 'Not the same')
+                // console.log(oldPosition)
             }
         }
     }
 
     const _onDragEnd = event => {
         event.preventDefault()
-        newPos = [...section.children].map(child => document.getElementById(child.id).getBoundingClientRect())
-        console.log(newPos)
-        dragEl.classList.remove('ghost')
+        newPosition = [...section.children].map(child => document.getElementById(child.id).getBoundingClientRect())
+        console.log(newPosition)
+        dragElement.classList.remove('ghost')
         section.removeEventListener('dragover', _onDragOver, false)
         section.removeEventListener('dragend', _onDragEnd, false)
 
-        nextEl !== dragEl.nextSibling ? onUpdate(dragEl) : false
+        nextElement !== dragElement.nextSibling ? onUpdate(dragElement) : false
     }
 
-    section.addEventListener('dragstart', function(e) {
-        dragEl = e.target
-        nextEl = dragEl.nextSibling
-        /* dragGhost = dragEl.cloneNode(true);
-        dragGhost.classList.add('hidden-drag-ghost'); */
+    section.addEventListener('dragstart', event => {
+        dragElement = event.target
+        nextElement = dragElement.nextSibling
+        // dragGhost = dragElement.cloneNode(true);
+        // dragGhost.classList.add('hidden-drag-ghost');
 
-        /*  document.body.appendChild(dragGhost);
-         e.dataTransfer.setDragImage(dragGhost, 0, 0); */
+        // document.body.appendChild(dragGhost);
+        //  event.dataTransfer.setDragImage(dragGhost, 0, 0);
 
-        e.dataTransfer.effectAllowed = 'move'
-        e.dataTransfer.setData('Text', dragEl.textContent)
+        event.dataTransfer.effectAllowed = 'move'
+        event.dataTransfer.setData('Text', dragElement.textContent)
 
         section.addEventListener('dragover', _onDragOver, false)
         section.addEventListener('dragend', _onDragEnd, false)
 
         setTimeout(function() {
-            dragEl.classList.add('ghost')
+            dragElement.classList.add('ghost')
         }, 0)
     })
 }
