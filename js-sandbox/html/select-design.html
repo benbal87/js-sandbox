@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible"
+              content="ie=edge">
+        <title>Test</title>
+        <style>
+            .center {
+                display: grid;
+                align-items: center;
+                justify-content: center;
+            }
+
+            body {
+                min-height: 100vh;
+            }
+
+            .select-container {
+                width: 50vw;
+                height: 50vh;
+                border: 1px solid black;
+            }
+
+            .select-input {
+                cursor: pointer;
+                width: 200px;
+                padding: 0 7px;
+                height: 30px;
+                background-color: #FAFAFA;
+                color: #818181;
+                outline: none;
+                border-top: none;
+                border-left: none;
+                border-right: none;
+                border-bottom: 1px solid #2BCB96;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                -ms-appearance: none;
+                appearance: none;
+                background-image: url("../assets/select-box-button-opt.svg");
+                background-repeat: no-repeat, repeat;
+                background-position: right .8em top 60%, 0 0;
+                background-size: 0.8em auto, 100%;
+            }
+        </style>
+    </head>
+
+    <body class="center">
+        <button id="test">
+            TEST
+        </button>
+        <input id="input" type="text">
+<!--        <div class="select-container center">-->
+<!--            <select class="select-input">-->
+<!--                <option>Select an option</option>-->
+<!--                <option value="1">One</option>-->
+<!--                <option value="2">Two</option>-->
+<!--                <option value="3">Three</option>-->
+<!--                <option value="4">Four</option>-->
+<!--            </select>-->
+<!--        </div>-->
+    </body>
+    <script>
+        document.getElementById('test').addEventListener('click', () => {
+            const val = document.getElementById('input').value
+            console.log('input value: ', val);
+            console.log('input value length: ', val.length);
+        });
+    </script>
+</html>
