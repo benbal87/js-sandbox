@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible"
+              content="ie=edge">
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <title>Plotly.js</title>
+        <style>
+            #plotlyContainer {
+                border: 1px solid red;
+                /*width: 522px;*/
+                /*height: 300px;*/
+            }
+        </style>
+    </head>
+    <body>
+        <div id="plotlyContainer"></div>
+        <button id="changeButton">CHANGE TITLE</button>
+        <script>
+            const data = {
+                data: [
+                    {
+                        type: 'scatter',
+                        name: 'Project 1',
+                        mode: 'markers',
+                        // hovermode: 'x unified',
+                        hoverinfo: 'none',
+                        hovertemplate: 'Velocity: %{x}<br>Efficiency: %{y}<br>Code Volume: %{data.marker.size}',
+                        // text: ['Code Volume: 58'],
+                        hoverlabel: {
+                            bgcolor: '#F5F5F5',
+                            bordercolor: 'rgba(0,0,0,0)',
+                            font: {
+                                color: '#868686'
+                            }
+                        },
+                        marker: {
+                            color: 'rgba(255, 0, 0, 0.6)',
+                            size: 58,
+                            symbol: 'circle',
+                            line: {
+                                color: 'rgba(255, 0, 0, 1)',
+                                width: 2
+                            }
+                        },
+                        showlegend: true,
+                        x: [22],
+                        y: [36],
+                    },
+                    {
+                        type: 'scatter',
+                        name: 'Project 2',
+                        mode: 'markers',
+                        marker: {
+                            color: 'rgba(17, 157, 255, 0.6)',
+                            size: 73,
+                            symbol: 'circle',
+                            line: {
+                                color: 'rgba(17, 157, 255, 1)',
+                                width: 2
+                            }
+                        },
+                        showlegend: true,
+                        x: [67],
+                        y: [52]
+                    },
+                    {
+                        type: 'scatter',
+                        name: 'Project 3',
+                        mode: 'markers',
+                        marker: {
+                            color: 'rgba(0, 128, 0, 0.6)',
+                            size: 73,
+                            symbol: 'circle',
+                            line: {
+                                color: 'rgba(0, 128, 0, 1)',
+                                width: 2
+                            }
+                        },
+                        showlegend: true,
+                        x: [56],
+                        y: [74]
+                    }
+                ],
+                layout: {
+                    annotations: [
+                        {
+                            xref: 'paper',
+                            yref: 'paper',
+                            x: 1,
+                            y: -0.15,
+                            showarrow: false,
+                            text: 'X Axis Title',
+                            font: {
+                                size: 12
+                            }
+                        },
+                        {
+                            xref: 'paper',
+                            yref: 'paper',
+                            x: -0.05,
+                            y: 1.15,
+                            showarrow: false,
+                            text: 'Y Axis Title',
+                            font: {
+                                size: 12
+                            }
+                        },
+                        {
+                            xref: 'paper',
+                            yref: 'paper',
+                            x: 0,
+                            y: 0,
+                            showarrow: false,
+                            text: 'left lower',
+                            font: {
+                                size: 12
+                            }
+                        },
+                        {
+                            xref: 'paper',
+                            yref: 'paper',
+                            x: 0,
+                            y: 1,
+                            showarrow: false,
+                            text: 'left upper',
+                            font: {
+                                size: 12
+                            }
+                        },
+                        {
+                            xref: 'paper',
+                            yref: 'paper',
+                            x: 1,
+                            y: 0,
+                            showarrow: false,
+                            text: 'right lower',
+                            font: {
+                                size: 12
+                            }
+                        },
+                        {
+                            xref: 'paper',
+                            yref: 'paper',
+                            x: 1,
+                            y: 1,
+                            showarrow: false,
+                            text: 'right upper',
+                            font: {
+                                size: 12
+                            }
+                        }
+                    ],
+                    shapes: [
+                        {
+                            type: 'line',
+                            layer: 'below',
+                            xref: 'paper',
+                            yref: 'paper',
+                            x0: 0,
+                            y0: 0.5,
+                            x1: 1,
+                            y1: 0.5,
+                            line: {
+                                color: 'grey',
+                                width: 2,
+                                dash: 'dot'
+                            }
+                        },
+                        {
+                            type: 'line',
+                            layer: 'below',
+                            xref: 'paper',
+                            yref: 'paper',
+                            x0: 0.5,
+                            y0: 0,
+                            x1: 0.5,
+                            y1: 1,
+                            line: {
+                                color: 'grey',
+                                width: 2,
+                                dash: 'dot'
+                            }
+                        }
+                    ],
+                    titlex: 0.75,
+                    xaxis: {
+                        showticklabels: false,
+                        title: {
+                            text: 'Velocity'
+                        }
+                    },
+                    yaxis: {
+                        showticklabels: false,
+                        title: {
+                            text: 'Efficiency'
+                        }
+                    },
+                    hovermode: 'closest',
+                    title: {
+                        font: {
+                            color: '#7F7F7F',
+                            size: 22
+                        },
+                        text: 'Coding Productivity by Project'
+                    }
+                },
+                config: { responsive: true }
+            }
+
+            const plotlyContainerElement = document.getElementById('plotlyContainer')
+            Plotly.newPlot(plotlyContainerElement, data)
+        </script>
+    </body>
+</html>
