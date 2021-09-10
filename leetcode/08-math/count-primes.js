@@ -2,15 +2,15 @@
  * @param {number} number
  * @return {number}
  */
-var countPrimes = function(number) {
-  let counter = 0
-  for (let i = 0; i < number; i++) {
-    if (isPrime(i)) {
-      counter++
+const countPrimes = function (number) {
+    let counter = 0
+    for (let i = 0; i < number; i++) {
+        if (isPrime(i)) {
+            counter++
+        }
     }
-  }
 
-  return counter
+    return counter
 }
 
 /**

@@ -34,3 +34,22 @@ console.log(isEqual2)
 
 let isEqual3 = _.isEmpty(objArray3);
 console.log(isEqual3)
+
+const array =[
+    undefined,
+    null,
+    {},
+    [],
+    '',
+    'asdasdasd',
+    0,
+    0n,
+    NaN,
+    new Set(),
+    new Map(),
+    1
+]
+
+array.forEach(item => {
+    console.log(`isEmpty "${item}": ${_.isEmpty(item)}`)
+})

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    >
+    <meta
+        http-equiv="X-UA-Compatible"
+        content="ie=edge"
+    >
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <title>Plotly.js</title>
+    <style>
+        #plotlyContainer {
+            border: 1px solid red;
+            width: 600px;
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+<div id="plotlyContainer"></div>
+<script>
+    const mockData = [
+        {
+            'name': 'Ventosanzap',
+            'value': 3060
+        },
+        {
+            'name': 'Domainer',
+            'value': 575
+        },
+        {
+            'name': 'Transcof',
+            'value': 1031
+        },
+        {
+            'name': 'Subin',
+            'value': 1106
+        },
+        {
+            'name': 'Zaam-Dox',
+            'value': 920
+        },
+        {
+            'name': 'Quo Lux',
+            'value': 4287
+        },
+        {
+            'name': 'Andalax',
+            'value': 3552
+        }
+    ]
+
+    const sum = mockData.reduce((acc, item) => acc + item.value, 0)
+    const { hoverTemplates, labels, percentages } = mockData.reduce((acc, item) => {
+        acc.labels.push(item.name)
+        acc.percentages.push((item.value / sum) * 100)
+
+        const firstLine = '%{label}: %{value:.1f}%<br>'
+        const secondLine = `Value: ${item.value} HUF`
+        const extra = '<extra></extra>'
+        acc.hoverTemplates.push(firstLine + secondLine + extra)
+        return acc
+    }, {
+        labels: [],
+        percentages: [],
+        hoverTemplates: []
+    })
+
+    const data = {
+        data: [
+            {
+                type: 'pie',
+                values: percentages,
+                labels,
+                // hoverinfo: 'label+text+value',
+                hovertemplate: hoverTemplates, // overrides hoverinfo
+                hole: 0,
+                textposition: 'outside',
+                // textinfo: 'label+percent',
+                texttemplate: '%{label}<br>%{value:.1f}%', // overrides textinfo
+                automargin: true,
+                textfont: {
+                    size: 11,
+                    color: '#555560'
+                },
+                marker: {
+                    colors: [
+                        'blue',
+                        'orange',
+                        'red'
+                    ],
+                    line: {
+                        color: 'white',
+                        width: 5
+                    }
+                }
+            }
+        ],
+        layout: {
+            // hovermode: 'x unified',
+            showlegend: false,
+            // title: {
+            //     font: {
+            //         color: '#7F7F7F',
+            //         size: 22
+            //     },
+            //     text: 'Pie Chart Example'
+            // },
+            margin: { t: 20, b: 20, l: 0, r: 0 }
+        },
+        config: {
+            responsive: true
+        }
+    }
+
+    const plotlyContainerElement = document.getElementById('plotlyContainer')
+    Plotly.newPlot(plotlyContainerElement, data)
+</script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 /**
- * @param {char[]} charArray
+ * @param {string[]} charArray
  * @return {void} Do not return anything, modify s in-place instead.
  */
 let reverseString = function(charArray) {

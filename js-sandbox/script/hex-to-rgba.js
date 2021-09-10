@@ -9,11 +9,13 @@ function hexToRgba(hexColorCode, opacity = 1) {
         c = [c[0], c[0], c[1], c[1], c[2], c[2]];
     }
 
-    c = `0x${c.join('')}`;
+    c = parseInt(`0x${c.join('')}`, 6);
     // eslint-disable-next-line no-bitwise
     const rgbaString = [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(', ');
     return `rgba(${rgbaString}, ${opacity})`;
 }
 
-const rgba = hexToRgba('#4F7CA9', 0.05)
-console.log(rgba)
+const hex = '#2BCB96';
+const opacity = 0.05
+const rgba = hexToRgba(hex, opacity)
+console.log(`"${hex}" | "${rgba}" | ${rgba === `rgba(43, 203, 150, ${opacity})`}`)

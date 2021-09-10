@@ -20,11 +20,11 @@ let containsDuplicate = function(nums) {
  */
 let containsDuplicate2 = function(nums) {
   let result = false
-  for (let i = 0; i < nums.length; i++) {
+  loop: for (let i = 0; i < nums.length; i++) {
     for (let j = 0; j < i; j++) {
       if (nums[j] === nums[i]) {
         result = true
-        break
+        break loop
       }
     }
   }
