@@ -9,9 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lodash": "^4.17.20",
-    "moment": "^2.29.1",
-    "ramda": "^0.27.1",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.3",
+    "ramda": "^0.28.0",
     "url-pattern": "^1.0.3"
   }
 }
