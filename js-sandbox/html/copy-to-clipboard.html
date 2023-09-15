@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+  >
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Copy to Clipboard</title>
+  <style>
+      div {
+          cursor: pointer;
+      }
+  </style>
+</head>
+<body>
+<div id="copyToClipboard">
+  COPY THIS TEXT TO THE CLIPBOARD!
+</div>
+<script>
+  document.getElementById('copyToClipboard').addEventListener(
+    'click',
+    (event) => {
+      const text = event.target.innerHTML
+      console.log('event', text)
+      window.navigator.clipboard.writeText(text)
+        .then(
+          resp => {
+            console.log('clipboard successfully set', resp)
+          },
+          resp => {
+            console.log('clipboard write failed', resp)
+          }
+        )
+    }
+  )
+</script>
+</body>
+</html>
